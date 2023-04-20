@@ -83,7 +83,7 @@ async def gen(message, *args):
     # 引数を解析
     try:
         parser = argparse.ArgumentParser() 
-        parser.add_argument("--model", "-m", type=str, help="Model name.")
+        parser.add_argument("--model", "-m", type=str, help="Model name.", default=config["default_model"])
         parser.add_argument("--times", "-t", type=int, help="Export Count.", default=1)
         parser.add_argument("--negative", "-n", type=str, help="Negative prompt.", default="")
         parser.add_argument("prompt", type=str, help="Prompt to generate image.")
@@ -101,7 +101,7 @@ async def gen(message, *args):
         n_prompt = parsed_args.negative
 
     # モデルIDを決定
-    model_id = config["default_model"]
+    model_id = ""
     if hasattr(parsed_args, "model") and parsed_args.model is not None:
         exist = False
         for model in models:
