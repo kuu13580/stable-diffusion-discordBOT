@@ -1,4 +1,4 @@
 [
   {"model":"stable-diffusion-v1", "path":"runwayml/stable-diffusion-v1-5"},
-  {"model":"stable-diffusion-v2", "path":"stabilityai/stable-diffusion-2-1"},
+  {"model":"stable-diffusion-v2", "path":"stabilityai/stable-diffusion-2-1"}
 ]
