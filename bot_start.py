@@ -7,6 +7,7 @@ import argparse
 from io import BytesIO
 from configparser import ConfigParser
 from datetime import datetime
+import subprocess
 
 # json読み込み
 def load_models():
@@ -61,8 +62,8 @@ bot = commands.Bot(command_prefix=config["command_prefix"],intents=intents)
 @bot.event
 async def on_ready():
     print('We have logged in as {0.user}'.format(bot))
-    channel = bot.get_channel(int(config["on_ready_channel_id"]))
-    if eval(config["enable_on_ready_message"]):
+    if eval(config["enable_ready_message"]):
+        channel = bot.get_channel(int(config["on_ready_channel_id"]))
         await channel.send("Bot is ready.")
 
 @bot.command()
@@ -126,4 +127,8 @@ async def gen(message, *args):
         fileio.seek(0)
         await message.channel.send(file=discord.File(fileio, "image.png"))
 
-bot.run(config["discord_token"])
+try:
+    bot.run(config["discord_token"])
+finally:
+    if eval(config["enable_disconnected_message"]):
+        subprocess.run(["python", "./disconnect.py"])
