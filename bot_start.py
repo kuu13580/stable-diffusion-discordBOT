@@ -28,8 +28,7 @@ load_config()
 def stableDiffusion(prompt, model_id, n_prompt):
     scheduler = EulerDiscreteScheduler.from_pretrained(model_id, subfolder="scheduler")
     pipe = StableDiffusionPipeline.from_pretrained(model_id, 
-                                                   torch_dtype=torch.float16, 
-                                                   revision="fp16",
+                                                   torch_dtype=torch.float16,
                                                    scheduler=scheduler,
                                                    custom_pipeline="lpw_stable_diffusion"
                                                    )
