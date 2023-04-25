@@ -114,6 +114,9 @@ async def gen(message, *args):
         
     # 生成回数
     times = parsed_args.times
+    if times > int(config["max_generation"]):
+        await message.channel.send("times argument is too large.")
+        return
 
     # 生成
     for i in range(times):
